@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <title>Armazenamento de Dados em JS - Guilherme Ajalla</title>
+    <meta charset="utf-8">
+    <script>
+        /*function mudou(input){
+            //console.log(input.files[0])
+            var arq = input.files[0];
+            var reader = new FileReader();
+            reader.onload = completou;
+            reader.readAsText(arq);
+        }
+
+        function completou(e){
+            console.log(e.target.result);
+        }*/
+
+        function mudaArquivo3(input) {
+            var arq = input.files[0];
+            var reader = new FileReader();
+            reader.onload = carregou2;
+            reader.readAsDataURL(arq);	//note que o método usado aqui é o readAsDataURL, assim podemos carregar qualquer tipo de arquivo e não apenas texto
+        }
+        function carregou2(e) {
+            if (e.target.result.slice(5, 10) === 'image') {	//Se o mime-type for de imagem, cria uma tag 'img'
+                var img = document.createElement('img');
+                img.src = e.target.result;
+                resultado.appendChild(img);
+            }
+            else {
+                var link = document.createElement('a');	//Senão, cria um link
+                link.href = e.target.result;
+                link.innerHTML = 'Arquivo ';
+                resultado.appendChild(link);
+            }
+        }
+    </script>
+  </head>
+  <body>
+    <!--<input type="file" onChange="mudou(this)">-->
+    <input type="file" id="arquivo2" name="arquivo2" onchange="mudaArquivo3(this)">
+    <div id="resultado"></div>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <title>Armazenamento de Dados em JS - Guilherme Ajalla</title>
+    <meta charset="utf-8">
+    <script>
+        sessionStorage.setItem('teste2', 10); // Também pode ser utilizado
+        /* localStorage.teste = 20;
+        localStorage['teste'] = 30; // Ideal para ser usado quando você quer pegar uma variavel.
+        var nome = 'nome';
+        localStorage[nome] = 21; 
+        // localStorage.removeItem('teste'); //Remover item
+        // localStorage.clear();
+        /* for (var i = 0; i < localStorage.length;i++){
+            console.log(localStorage.key(i));
+        }*/ // Percorrer um localStorage
+
+        var obj = {primeiroNome: 'Guilherme', segundoNome: 'Ajalla', dataNasc: new Date('1996-07-22 00:00')}
+        localStorage.pessoa = JSON.stringify(obj);
+        var pessoa = JSON.parse(localStorage.pessoa); //interpreta e transforma para objeto novamente.
+        console.log(pessoa);
+
+        // Uso JSON + LocalStorage
+    </script>
+  </head>
+  <body>
+  </body>
+</html>

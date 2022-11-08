@@ -1,0 +1,23 @@
+Orientações gerais: 
+
+<?php
+	//código vai aqui.
+?>
+
+- Concatenação se da pelo '.' e não pelo '+' (como no Js.)
+
+- Com as aspas duplas("") as variaveis de dentro são
+interpretadas
+
+- Para fazer o "\n" funcionar , tem que ser em aspas duplas
+(""), como navegador interpreta HTML para ir para nova linha
+necessário por a tag <br>
+
+- Operadores lógicos || ou or, && ou and
+
+- Comentários pode ser: /**/, //, #
+
+- "continue" ele ignora a próxima ação de continua o programa
+- "break" ele encerra a ação ali mesmo.
+
+- 

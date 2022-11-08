@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <title>Tarefa - Arquivos - Guilherme Ajalla</title>
+    <meta charset="utf-8">
+    
+  </head>
+  <body onload="iniciar()">
+    <h1>Guardador de Arquivos</h1>
+    <input type="file" id="arquivo" name="arquivo" onchange="getArquivo(this)">
+    <ul id="arquivos">
+
+    </ul>
+  </body>
+
+  <script>
+    let listArquivos = [];
+    function iniciar(){
+        if(JSON.parse(localStorage.getItem(localStorage.key(arquivos)))){
+        var arquivos = JSON.parse(localStorage.getItem(localStorage.key(arquivos)));
+        mapHTML(arquivos);
+        }
+    }
+
+    function getArquivo(file){
+        var arq = file.files[0];
+        var reader = new FileReader();
+        reader.onload = salvarLStorage;
+        reader.readAsDataURL(arq);
+    }
+
+    function salvarLStorage(e){
+        var getInput = e.target.result;
+        listArquivos.push(getInput);
+        localStorage.arquivos = JSON.stringify(listArquivos);
+
+        criarHTML();
+    }
+
+    function criarHTML(){
+        clearHTML();
+        var arquivos = JSON.parse(localStorage.arquivos);
+        mapHTML(arquivos);
+    }
+
+    function clearHTML(){
+        let ul= document.getElementById("arquivos");
+        ul.innerText = "";
+    }
+
+    function mapHTML(arquivos){
+        arquivos.map((arquivo, index) => {
+            if (arquivo.slice(5, 10) === 'image'){
+                var img = document.createElement('img');
+                var li = document.createElement('li');
+                img.src = arquivo;
+                li.appendChild(img);
+                document.getElementById("arquivos").appendChild(li);
+            } else {
+                var link = document.createElement('a');
+                var li = document.createElement('li');
+                link.href = arquivo;
+                link.innerHTML = 'Arquivo ';
+                li.appendChild(link);
+                document.getElementById("arquivos").appendChild(li);
+            }
+        });
+    }
+</script>
+</html>

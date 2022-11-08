@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <title>Tarefa - jQuery - Guilherme Ajalla</title>
+    <meta charset="utf-8">
+    <style>
+        div {
+            border: 1px solid black;
+            width: 100px;
+            height: 100px;
+            text-align: center;
+            float: left;
+            margin: 4px;
+            background-color: white;
+        }
+
+        .apaga {
+            background-color: black;
+        }
+    </style>
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+  </head>
+  <body>
+    <div id="hide">Eu sumo quando clicado</div>
+    <div id="fade">Eu desvaneco quando clicado</div>
+    <div id="slide">Eu encolho quando clicado</div>
+    <div id="luz">Interruptor</div>
+    <div id="move">Eu me movo quando clicado</div>
+    <div id="sensor">Sensor de Mouse</div>
+    <div id="fabrica">Eu fabrico caixas</div>
+    <div id="destroi">Eu destruo caixas</div>
+  </body>
+    <script>
+        $('#hide').click(function(){
+            $(this).hide();
+        });
+
+        $('#fade').click(function(){
+            $(this).fadeOut();
+        });
+
+        $('#slide').click(function(){
+            $(this).slideUp();
+        });
+
+        $('#luz').click(function(){
+            $('body').toggleClass('apaga');
+            // if($('body').hasClass('apaga')){
+            //     $('body').removeClass('apaga');
+            // } else {
+            //     $('body').addClass('apaga');
+            // } deixei, pois foi a primeira opção que utilizei para resolver o problema e gostaria de deixar guardado.
+        });
+
+        
+        let clicked = 0;
+        $('#move').click(function(){
+            if(clicked %2 == 0){
+                $(this).animate({marginLeft: '100px'});
+            } else {
+                $(this).animate({marginLeft: '4px'});
+            }
+            clicked+=1
+        });
+
+        $('#sensor').mouseenter(function(){
+            $(this).text('Cursor detectado!');
+        });
+
+        $('#sensor').mouseleave(function(){
+            $(this).text('Sensor de Mouse');
+        });
+
+        $('#fabrica').click(function(){
+            $(this).after('<div class="caixa"></div>');
+        });
+
+        $('#destroi').click(function(){
+            $('.caixa:last').remove();
+        });
+    </script>
+</html>

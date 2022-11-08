@@ -1,0 +1,199 @@
+Não da pra usar echo com array
+
+necessário usar print_r()
+--------------------------------------------------------
+echo '<pre>';
+print_r($arr);
+echo '</pre>';
+
+
+//Mostra isso na tela:
+Array
+(
+ [0] => abacaxi
+ [1] => banana
+ [2] => cereja
+ [3] => damasco
+ [10] => jaca
+)
+--------------------------------------------------------
+Podemos adicionar elementos em arrays de várias maneiras, sendo estas as mais simples:
+$arr[] = 'damasco'; //Acrescenta 'damasco' no índice 3
+$arr[10] = 'jaca'; //Acrescenta 'jaca' no índice 10
+--------------------------------------------------------
+● Para remover elementos de um array, usamos o comando unset()
+unset($arr[1]); //Remove o elemento no índice 1
+
+Para saber o tamanho de um array, usamos o
+comando count()
+echo count($arr); //4
+● Além de índices (chaves) numéricos, podemos ter
+índices em texto
+$arr['preferida'] = 'maçã'; //Acrescenta o elemento 'maçã' na
+chave (posição / índice) 'preferida'
+--------------------------------------------------------
+foreach significa “para cada”
+● É um tipo de laço especial para ser usado com arrays
+● Sintaxe:
+foreach (array as variável) {
+comandos
+}
+Ex.:
+foreach ($arr as $fruta) {
+echo “Fruta: $fruta <br>”;
+}
+● Saída:
+Fruta: abacaxi
+Fruta: cereja
+Fruta: damasco
+Fruta: jaca
+Fruta: maçã
+--------------------------------------------------------
+O PHP tem uma vasta lista de funções para manipular arrays, veremos aqui as mais
+importantes / comuns
+● Array como Pilha
+● array_push(): insere um elemento no final do array (similar a $arr[])
+● array_pop(): remove e retorna o último elemento do array
+● Array como Fila
+● array_unshift(): insere um elemento no começo do array
+● array_shift(): remove e retorna o primeiro elemento do array
+● Array como Conjunto
+● in_array(): verifica se um elemento pertence a um array
+● array_diff(): diferença entre 2 arrays
+● array_intersect(): intersecção entre 2 arrays
+● array_merge() (ou operador +): união de 2 arrays
+--------------------------------------------------------
+Outras Funções de Arrays Úteis
+● implode, explode
+● sort, asort, rsort, arsort
+● array_sum
+● array_count_values
+● array_filter
+● array_map
+● array_slice
+● array_replace
+● in_array
+● key_exists
+--------------------------------------------------------
+A função 'explode' quebra uma string em pedaços e os coloca em
+um array. Ex.:
+$str = “abacaxi banana cereja”;
+$arr = explode(' ',$str); //quebra usando espaços (' ') como delimitador
+print_r($arr);
+//saída:
+Array
+(
+[0] => abacaxi
+[1] => banana
+[2] => cereja
+)
+
+A função 'implode' faz o inverso: junta os elementos
+de um array na forma de uma string. Ex.:
+$arr = array('abc','def','ghi');
+$str = implode(', ',$arr); //junta usando vírgula e espaço (', ')
+como delimitador
+echo $str;
+//saída:
+abc, def, ghi
+
+● A função sort ordena os valores de um array em ordem crescente. O próprio
+array passado como parâmetro será modificado. Ex.:
+$arr = array(5,1,9);
+sort($arr);
+print_r($arr);
+//saída:
+Array
+(
+[0] => 1
+[1] => 5
+[2] => 9
+)
+● Esta função também consegue ordenar texto
+$arr = array('banana','cereja','abacaxi');
+sort($arr);
+print_r($arr);
+//saída:
+Array
+(
+[0] => 'abacaxi'
+[1] => 'banana'
+[2] => 'cereja'
+)
+● A função rsort funciona de forma idêntica, mas ordena 
+em ordem reversa. 
+
+● Ao ordenar um array com índices textuais usando a função sort, estes são
+perdidos. Para preservar os índices, use as funções asort e arsort. Ex.:
+$arr = array('amarela'=>'banana','vermelha'=>'cereja','grande'=>'abacaxi');
+sort($arr);
+print_r($arr);
+//saída:
+Array
+(
+[0] => 'abacaxi'
+[1] => 'banana'
+[2] => 'cereja'
+)
+asort($arr);
+print_r($arr);
+//saída:
+Array
+(
+[grande] => 'abacaxi'
+[amarela] => 'banana'
+[vermelha] => 'cereja'
+)
+
+A função array_sum retorna o somatório dos
+valores em um array. Ex.:
+$arr = array(5,1,3);
+$soma = array_sum($arr);
+echo $soma; //Mostra 9
+
+A função array_count_values recebe um arry e retorna um novo array onde cada
+elemento único do array original passa a ser um índice, e o seu valor é a quantidade de
+vezes em que este elemento aparecia no array original. Ex.:
+$arr = array('azul','vermelho','verde','azul','verde','verde','amarelo');
+$contagem = array_count_values($arr);
+print_r($contagem);
+//saída:
+Array
+(
+[azul] => 2
+[vermelho] => 1
+[verde] => 3
+[amarelo] => 1
+)
+
+A função array_filter recebe um array e o nome de uma função, e retorna um array
+contendo apenas os elementos que produzem o valor verdadeiro pela função. Ex.:
+function impar($var) {
+return($var & 1);
+}
+function par($var) {
+ return(!($var & 1));
+}
+$array1 = array("a" => 1, "b" => 2, "c" => 3, "d" => 4, "e" => 5);
+$array2 = array(6, 7, 8, 9, 10, 11, 12);
+echo "Impares: \n";
+print_r(array_filter($array1, "impar"));
+echo "Pares: \n";
+print_r(array_filter($array2, "par"));
+//Saída:
+Impares:
+Array
+(
+ [a] => 1
+ [c] => 3
+ [e] => 5
+)
+Pares:
+Array
+(
+ [0] => 6
+ [2] => 8
+ [4] => 10
+ [6] => 12
+)
+

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Formulário</title>
+</head>
+<body>
+	<form method="post" action="processa.php">
+		<fieldset>
+			<legend>Cadastro</legend>
+
+			<label>Nome: <input type="text" name="name"></label>
+			<label>E-mail: <input type="email" name="email" placeholder="exemplo@exemplo.com"></label>
+
+			<p>Sexo:
+				<label><br><input type="radio" name="sex" value="M"> Maculino</label>
+				<label><br><input type="radio" name="sex" value="F"> Feminino</label>
+				<label><br><input type="radio" name="sex" value="NB"> Não Binário</label>
+				<label><br><input type="radio" name="sex" value="PND"> Prefiro não dizer</label>
+			</p>
+
+			<label>Data de nascimento: <input type="date" name="borndate" placeholder="dd/mm/aaaa"></label>
+			<p>
+				<label>Endereço: <input type="text" name="address" placeholder="R. xxx nº: 00"></label>
+				<label>Bairro: <input type="text" name="district"></label>
+			</p>
+				<label>Estado: 
+					<select name="states">
+						<optgroup>
+							<option>Selecione</option>
+							<option value="AC">Acre</option>
+							<option value="AL">Alagoas</option>
+							<option value="AP">Amapá</option>
+							<option value="AM">Amazonas</option>
+							<option value="BA">Bahia</option>
+							<option value="CE">Ceará</option>
+							<option value="ES">Espírito Santo</option>
+							<option value="GO">Goiás</option>
+							<option value="MA">Maranhão</option>
+							<option value="MT">Mato Grosso</option>
+							<option value="MS">Mato Grosso do Sul</option>
+							<option value="MG">Minas Gerais</option>
+							<option value="PA">Pará</option>
+							<option value="PB">Paraíba</option>
+							<option value="PR">Paraná</option>
+							<option value="PE">Pernambuco</option>
+							<option value="PI">Piauí</option>
+							<option value="RJ">Rio de Janeiro</option>
+							<option value="RN">Rio Grande do Norte</option>
+							<option value="RS">Rio Grande do Sul</option>
+							<option value="RO">Rondônia</option>
+							<option value="RR">Roraima</option>
+							<option value="SC">Santa Catarina</option>
+							<option value="SP">São Paulo</option>
+							<option value="SE">Sergipe</option>
+							<option value="TO">Tocantins</option>
+							<option value="DF">Distrito Federal</option>
+						</optgroup>
+					</select>
+				</label>
+
+			<p>
+				<label>Cidade:
+					<input type="text" name="city">
+				</label>
+			</p>
+
+			<p>
+				<label>CEP:
+					<input type="text" name="zipCode" placeholder="XXXXX-XXX">
+				</label>
+			</p>
+
+			<p>
+				<label>
+					<input type="checkbox" name="receive"> Deseja receber e-mails?
+				</label>
+			</p>
+		</fieldset>
+		<input type="submit" name="submit">
+	</form>
+</body>
+</html>

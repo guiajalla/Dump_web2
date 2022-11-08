@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Orientada Objeto - Guilherme Ajalla</title>
+        
+        <style>
+            body {
+            font-family: Arial;
+            }
+            label {
+            display: inline-block;
+            width: 150px;
+            margin: 2px;
+            }
+            fieldset {
+            display: inline-block;
+            }
+            th {
+            background-color: black;
+            color: white;
+            }
+            #datanasc, #dataadmissao {
+            width: 10em;
+            }
+            td:last-child {
+            text-align: center;
+            color: red;
+            cursor: pointer;
+            }
+        </style>
+        <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    </head>
+    <body>
+        <form>
+            <fieldset>
+                <legend>Cadastro de Funcionário</legend>
+                <label for="nome">Nome:</label> <input type="text" id="nome"><br>
+                <label for="datanasc">Data de Nascimento:</label> <input type="text" id="datanasc" placeholder="dd/mm/aaaa"><br>
+                <label for="dataadmissao">Data de Admissão:</label> <input type="text" placeholder="dd/mm/aaaa" id="dataadmissao"><br>
+                <input type="button" id="btcadastrar" value="Cadastrar" onclick="cadastrar()">
+            </fieldset>
+        </form>
+        <table id="funcionarios">
+            <thead>
+                <tr><th>Nome</th><th>Data de Nascimento</th><th>Data de Admissão</th><th>Excluir</th></tr></thead>
+            <tbody>
+            </tbody>
+        </table>
+    </body>
+    <script>
+        class Pessoa {
+            constructor(nome, datanasc){
+                this.nome = nome;
+                this.datanasc = datanasc;
+            }
+
+            idade(datanasc){
+                var dataAtual = new Date();
+                var anoAtual = dataAtual.getFullYear();
+                var datanasc = datanasc.split('/');
+                var diaNasc = datanasc[0];
+                var mesNasc = datanasc[1];
+                var anoNasc = datanasc[2];
+                var idade = anoAtual - anoNasc;
+                var mesAtual = dataAtual.getMonth() + 1;
+
+                if(mesAtual < mesNasc){
+                idade--; 
+                } else {
+                    if (mesAtual == mesNasc) {
+                        if (new Date().getDate() < diaNasc) {
+                            idade--;
+                        }
+                    }
+                }
+                return idade;
+            }
+        }
+
+        class Funcionario extends Pessoa {
+            constructor(nome, datanasc, dataadmissao){
+                super(nome, datanasc);
+                this.dataadmissao = dataadmissao;
+            }
+
+            tempoServico(dataadmissao){
+                var dataAtual = new Date();
+                var anoAtual = dataAtual.getFullYear();
+
+                var dataadmissao = dataadmissao.split('/');
+                var diaAdmissao = dataadmissao[0];
+                var mesAdmissao = dataadmissao[1];
+                var anoAdmissao = dataadmissao[2];
+                var tempoServico = anoAtual - anoAdmissao;
+                var mesAtual = dataAtual.getMonth() + 1;
+
+                if(mesAtual < mesAdmissao){
+                tempoServico--; 
+                } else {
+                    if (mesAtual == mesAdmissao) {
+                        if (new Date().getDate() < diaAdmissao) {
+                            tempoServico--;
+                        }
+                    }
+                }
+                return tempoServico;
+            }
+        }
+
+        function validar() {
+            //validar datas
+            var datanasc = document.getElementById("datanasc").value;
+            var dataadmissao = document.getElementById("dataadmissao").value;
+            var regexData = /^\d{2}\/\d{2}\/\d{4}/i;
+
+            if (!regexData.test(datanasc)) {
+                alert('Data nascimento errada! (dd/mm/aaaa)')
+                f.datanasc.focus();
+                return false;
+            }
+            if (!regexData.test(dataadmissao)) {
+                alert('Data Admissão Incorreta! (dd/mm/aaaa)');
+                f.dataadmissao.focus();
+                return false;
+            }
+            return true;
+        }
+
+        function cadastrar() {
+            if(validar()){
+            var nome = document.getElementById("nome").value;
+            var datanasc = document.getElementById("datanasc").value;
+            var dataadmissao = document.getElementById("dataadmissao").value;
+            
+            obj = new Funcionario(nome, datanasc, dataadmissao);
+            var idade = obj.idade(datanasc);
+            mostrarDados(obj);
+            }
+        }
+
+        function mostrarDados(obj){
+            var corpoTabela = document.querySelector("tbody");
+            //Criar elementos
+            var linha = document.createElement("tr");
+            var campoNome = document.createElement("td");
+            var campoDataNasc = document.createElement("td");
+            var campoDataAdmissao = document.createElement("td");
+            var campoExcluir = document.createElement("td");
+            var campoDiv = document.createElement("div")
+            campoDiv.id = 'excluir';
+            // Criando nós
+            var textoNome = document.createTextNode(obj.nome);
+            var textoDataNasc = document.createTextNode(obj.datanasc + '(' + obj.idade(obj.datanasc) + ' anos)');
+            var textoDataAdmissao = document.createTextNode(obj.dataadmissao + '(' + obj.tempoServico(obj.dataadmissao) + ' anos)');
+            var textoExcluir = document.createTextNode('X');
+            // Vincular elementos aos nós
+            campoNome.appendChild(textoNome);
+            campoDataNasc.appendChild(textoDataNasc);
+            campoDataAdmissao.appendChild(textoDataAdmissao);
+            campoDiv.appendChild(textoExcluir);
+            campoExcluir.appendChild(campoDiv);
+            linha.appendChild(campoNome);
+            linha.appendChild(campoDataNasc);
+            linha.appendChild(campoDataAdmissao);
+            linha.appendChild(campoExcluir);
+            // Vincular elementos ao documento
+            corpoTabela.appendChild(linha);
+        }
+
+        $("#funcionarios").on('click', '#excluir', function() {
+            $(this).closest('tr').remove();
+        });
+        
+    </script>
+</html>

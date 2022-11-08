@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arquivos</title>
+</head>
+<body onload="iniciar()">
+    <input type="file" onchange="mudaArquivo(this)">
+    <div id="arquivos">
+    </div>
+
+</body>
+<script>
+
+// function guardar(input){
+//     var arq = input.files[0];
+//     var reader = new FileReader();
+//     reader.onload = completou;
+
+//     reader.readAsText(arq);
+// }
+function iniciar(){
+    for(var i = 0;i < localStorage.length;i++){
+        
+        var reader = new FileReader();
+        var e = localStorage.getItem(localStorage.key(i));
+
+        if (e.slice(5, 10) === 'image') {
+            var img = document.createElement('img');
+            img.src = e;
+            arquivos.appendChild(img);
+            arquivos.innerHTML += "<br>";
+	    }
+        else {
+            var link = document.createElement('a');
+            link.href = e;
+            link.innerHTML = 'Arquivo';
+            arquivos.innerHTML += "<br>";
+            arquivos.appendChild(link);
+        }
+    };
+}
+function mudaArquivo(input) {
+	var arq = input.files[0];
+	var reader = new FileReader();
+	reader.onload = completou;
+	reader.readAsDataURL(arq);
+}
+function completou(e){
+    localStorage.setItem("Arquivo"+localStorage.length,e.target.result);
+    if (e.target.result.slice(5, 10) === 'image') {
+		var img = document.createElement('img');
+		img.src = e.target.result;
+		arquivos.appendChild(img);
+	}
+	else {
+		var link = document.createElement('a');	//Senão, cria um link
+		link.href = e.target.result;
+		link.innerHTML = 'Arquivo ';
+		arquivos.appendChild(link);
+	}
+}
+</script>
+</html>

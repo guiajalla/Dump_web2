@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <title>Usando a Biblioteca jQuery</title>
+    <meta charset="utf-8">
+    <style>
+        div {
+            border: 1px solid red
+        }
+    </style>
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+  </head>
+  <body>
+    <div id="fora">
+        1<div>
+            1.1
+            <div>
+                1.2
+            </div>
+        </div>
+    </div>
+    <div>2</div>
+  </body>
+    <script>
+        //$('div').hide() //esconde as div.
+        //$('div').show(3000); // Aquilo que não esta aparecendo aparece.
+        //$('div').toggle(2000) // Aquilo que está escondido aparece, aquilo que esta sendo visto se oculta.
+        //$('div').fadeOut(2000)
+        //$('div').fadeIn(2000)
+        //$('div').fadeToggle() // Todas responsaveis por desvanecer elementos.
+        //$('div').animate({marginLeft: '200px', marginTop: '200px'}, 3000, function() { alert('acabou')}) //Fazer animações gerais
+        //$('div').hide(3000).show(3000) //encadeamento
+        //$('div').text('oi');
+        //$('div').html('<b>oi</b>')
+        //$('input').val()
+        //$('div').append('final') //Acrescenta conteúdo ao final de um elemento (dentro dele)
+        //$('div').prepend('final') //Acrescenta conteúdo ao inicio de um elemento (dentro dele)
+        //$('div').before('teste') // Adiciona elemento antes do elemento
+        //$('div').after('teste') // Adiciona elemento depois do elemento
+        //$('div').empty() // Esvazia o conteudo do elemento
+        //$('div').remove() // Deleta o elemento
+        //$('div').addClass('red')
+        //$('div').addClass('red')
+        //$('div').removeClass('red')
+        //$('div').toggleClass('red')
+        //$('div').css({backgroundColor: 'blue', borderRadius: '20px'})
+        //$('#fora').children().hide(3000)
+        //$('#fora').parent().hide(3000)
+        //$('div').click(function (){alert('clicou')})
+        //$('div div').mouseenter(function () {alert('entrou')})
+    </script>
+</html>
